@@ -30,7 +30,7 @@ class Flight {
         /* PROMISE
          *  A Default Value for Flight
          * Comment
-         *  Just use any value really, this is only neccesary for vector
+         *  Just use an empty/0 value really, this is only neccesary for vector
          */
 
         Flight(const FlightRecord& source);
@@ -78,7 +78,7 @@ class Flight {
 
         void getPassengerRecords(std::vector<PassengerRecord> &records) const;
         /* PROMISE
-         *  Insert the getRawData() from all Passenger to the vector of PassengerRecord (records)
+         *  Insert the getRecord() from all Passenger to the vector of PassengerRecord (records)
          */
 };
 

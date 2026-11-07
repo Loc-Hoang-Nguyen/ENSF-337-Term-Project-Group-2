@@ -31,7 +31,7 @@ class Passenger{
         /* PROMISE
          *  A Default Value for Passenger
          * Comment
-         *  Just use any value really, this is only neccesary for vector
+         *  Just use an empty/0 really, this is only neccesary for vector
          */
 
         Passenger(const PassengerRecord& source);
