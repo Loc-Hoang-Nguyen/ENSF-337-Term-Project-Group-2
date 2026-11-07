@@ -49,6 +49,8 @@ class Flight {
         /* PROMISE
          *  Display the Seat Map of this Flight
          *  Reference the option 3 in the D2L example for formatting
+         *  As per the Implementation Requirement:
+         *      vector<vector<char>> is to be used to build the seat map, then print it
          */
 
         void displayPassengers() const;
