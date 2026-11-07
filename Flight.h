@@ -14,8 +14,10 @@
 #include <string>
 #include <vector>
 
-//This is the length of Flight Code, use them for printing
+//This is the length of flight_code, origin, and destination, use them for output format
 #define F_CODE_SIZE 5
+#define F_ORG_SIZE 12
+#define F_DEST_SIZE 12
 
 class Flight {
     private:
@@ -51,10 +53,18 @@ class Flight {
 
         void displayPassengers() const;
         /* PROMISE
-         *  Display the Seat Map of this Flight
+         *  Display the Passengers of this Flight
          *  Reference the option 4 in the D2L example for formatting
          * Comment
          *  The person who handle Passenger.cpp probably should also handle this
+         */
+
+        void displayFlight() const;
+        /* PROMISE
+         *  Display the Flight Information
+         *  Reference the option 1 in the D2L example for formatting
+         * Comment
+         *  The person who handle Airline.cpp probably should also handle this
          */
 
         void addPassenger();
@@ -62,6 +72,8 @@ class Flight {
          *  Prompt the user for data of the passanger to add
          *  Reference the option 5 in the D2L example for formatting
          *  Check the passenger ID and seat location against all current Passenger to prevent overlap
+         *  Also check if the ID is in range (i.e. if P_ID_SIZE is 5, number must not exceed 5 digits)
+         *  Also check if seat location is in range of this Flight
          */
 
         void removePassenger();

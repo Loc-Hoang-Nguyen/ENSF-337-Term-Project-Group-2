@@ -18,6 +18,11 @@ void Flight::displayPassengers() const
     return;
 }
 
+void Flight::displayFlight() const
+{
+    return;
+}
+
 void Flight::addPassenger()
 {
     return;
