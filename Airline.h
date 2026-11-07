@@ -48,6 +48,7 @@ class Airline{
          *  Return true if successful, false if not
          * Comment
          *  Might be a good idea to implement macro so when a flag is define during compilation
+         *  A good idea is a TEST2 flag
          *  it can easily switch to a different file.
          */
 
@@ -57,6 +58,7 @@ class Airline{
          *  Return true if successful, false if not
          * Comment
          *  Might be a good idea to implement macro so when a flag is define during compilation
+         *  A good idea is a TEST2 flag
          *  it can easily switch to a different file.
          */
 };
