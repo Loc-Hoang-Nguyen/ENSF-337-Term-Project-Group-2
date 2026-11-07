@@ -2,3 +2,39 @@
 //
 // Build the seat map from this flight's dimensions and passenger information.
 // Implement the passenger display, addition and removal operations here.
+#include "Flight.h"
+
+Flight::Flight() {}
+
+Flight::Flight(const FlightRecord& source) { (void)source; }
+
+void Flight::displaySeatMap() const
+{
+    return;
+}
+
+void Flight::displayPassengers() const
+{
+    return;
+}
+
+void Flight::addPassenger()
+{
+    return;
+}
+
+void Flight::removePassenger()
+{
+    return;
+}
+
+const std::string& Flight::getFlightCode() const
+{
+    return flight_code;
+}
+
+void Flight::getPassengerRecords(std::vector<PassengerRecord> &records) const
+{
+    (void)records;
+    return;
+}
