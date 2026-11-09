@@ -45,7 +45,11 @@ class Airline{
         bool loadData();
         /* PROMISE
          *  Load the data from a file in a hardcoded path
-         *  Return true if successful, false if not
+         *  Return true if successful, false if not, and when return false, also cerr the error_message
+         * 
+         *  If there is an invalid PassengerRecord (check with Flight.addPassengerInternal())
+         *  Or a leftover PassengerRecord that doesn't belong to any Flight,
+         *  Return False and inform the user of the data error
          * Comment
          *  Might be a good idea to implement macro so when a flag is define during compilation
          *  A good idea is a TEST2 flag

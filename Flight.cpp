@@ -43,3 +43,10 @@ void Flight::getPassengerRecords(std::vector<PassengerRecord> &records) const
     (void)records;
     return;
 }
+
+bool addPassengerInternal(const PassengerRecord &record, std::string &err_msg)
+{
+    (void)record;
+    (void)err_msg;
+    return false;
+}

@@ -94,6 +94,19 @@ class Flight {
         /* PROMISE
          *  Insert the getRecord() from all Passenger to the vector of PassengerRecord (records)
          */
+
+        bool addPassengerInternal(const PassengerRecord &record, std::string &err_msg);
+        /* PROMISE
+         *  Add the PassengerRecord to Flight
+         *  Check the passenger ID and seat location against all current Passenger to prevent overlap
+         *  Also check if the ID is in range (i.e. if P_ID_SIZE is 5, number must not exceed 5 digits)
+         *  Also check if seat location is in range of this Flight
+         * 
+         *  If Successful, return true
+         *  Otherwise, return false and write the reason in err_msg
+         * Comment
+         *  The reason why the check exists is to make sure the input file itself is not faulty
+         */
 };
 
 #endif
