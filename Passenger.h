@@ -65,12 +65,12 @@ class Passenger{
          *  Return the seat_letter
          */
 
-        std::string getFirstName() const;
+        const std::string& getFirstName() const;
         /* PROMISE
          *  Return the first_name
          */
 
-        std::string getLastName() const;
+        const std::string& getLastName() const;
         /* PROMISE
          *  Return the last_name
          */

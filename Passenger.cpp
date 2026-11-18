@@ -25,6 +25,16 @@ char Passenger::getSeatLetter() const
     return 0;
 }
 
+const std::string& Passenger::getFirstName() const
+{
+    return first_name;
+}
+
+const std::string& Passenger::getLastName() const
+{
+    return last_name;
+}
+
 PassengerRecord Passenger::getRecord(const std::string& flight_code) const
 {
     (void)flight_code;
