@@ -65,6 +65,16 @@ class Passenger{
          *  Return the seat_letter
          */
 
+        std::string getFirstName() const;
+        /* PROMISE
+         *  Return the first_name
+         */
+
+        std::string getLastName() const;
+        /* PROMISE
+         *  Return the last_name
+         */
+
         PassengerRecord getRecord(const std::string& flight_code) const;
         /* PROMISE
          *  Return an equivalent PassengerRecord object with this class data for exporting
