@@ -66,7 +66,7 @@ class Flight {
          *  Display the Flight Information
          *  Reference the option 1 in the D2L example for formatting
          * Comment
-         *  The person who handle Airline.cpp probably should also handle this
+         *  The person who handle this file probably should also handle displayFlights from Airline.h
          */
 
         void addPassenger();
