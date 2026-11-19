@@ -73,7 +73,8 @@ void Flight::removePassenger()
 
     for(std::size_t i = 0;i<passengers.size();i++){
         if( p_id==passengers[i].getID() ){
-            std::cout << "Passenger " << passengers[i].getID();
+            std::cout << "Passenger " << passengers[i].getFirstName() << " " << passengers[i].getLastName()
+                    << " was successfully removed from flight " << flight_code << "." << std::endl;
             passengers.erase( passengers.begin() + i );
             return;
         }
