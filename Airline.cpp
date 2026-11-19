@@ -28,6 +28,9 @@ Flight* Airline::findFlight()
 {
     std::size_t index; // Input variable
 
+    /*
+    {ADD ERROR HANDLING LATER}
+    */
     std::cout << "Enter the flight number: "; // Input instructions
     std::cin >> index; // Get input
 
