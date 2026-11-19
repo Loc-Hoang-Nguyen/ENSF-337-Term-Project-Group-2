@@ -106,7 +106,7 @@ bool Airline::savePassengerData() const
 {  
     std::vector<PassengerRecord> records; // Vector to store passenger records in
 
-    for (int f = 0; f < flights.size(); f++) // For each flight
+    for (std::size_t f = 0; f < flights.size(); f++) // For each flight
     {
         flights[f].getPassengerRecords(records); // Get all passenger records for the flight, and append them to records
     }
