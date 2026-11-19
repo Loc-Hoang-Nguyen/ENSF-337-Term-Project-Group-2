@@ -111,7 +111,6 @@ void Flight::getPassengerRecords(std::vector<PassengerRecord> &records) const
 
 bool Flight::addPassengerInternal(const PassengerRecord &record, std::string &err_msg)
 {
-    //Checking the ID
     if( record.passenger_id<0 ){
         err_msg = "A passenger ID was negative.";
         return false;
