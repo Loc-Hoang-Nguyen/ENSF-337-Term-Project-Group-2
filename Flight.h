@@ -27,6 +27,13 @@ class Flight {
         int number_of_rows;
         int seats_per_row;
         std::vector<Passenger> passengers;
+
+        void clearInputBuffer() const;
+        /* PROMISE
+         *  Clear the cin buffer
+         * Comment
+         *  Is used A LOT, so seperate out for readability
+         */
     public:
         Flight();
         /* PROMISE
@@ -106,7 +113,9 @@ class Flight {
          */
 
         bool addPassengerInternal(const PassengerRecord &record, std::string &err_msg);
-        /* PROMISE
+        /* REQUIRES
+         *  Passenger flight_code is the same as Flight
+         * PROMISE
          *  Add the PassengerRecord to Flight
          *  Check the passenger ID and seat location against all current Passenger to prevent overlap
          *  Also check if the ID is in range (i.e. if P_ID_SIZE is 5, number must not exceed 5 digits)
