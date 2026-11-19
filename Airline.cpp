@@ -56,7 +56,7 @@ bool Airline::loadData()
     {
         for (std::size_t f = 0; f < flight_records.size(); f++) // For each flight record
         {
-            flights.push_back(Flight(flight_records[f])); // Add a new flight based on the record into flights member
+            flights.emplace_back(flight_records[f]); // Add a new flight based on the record into flights member
         }
 
         std::vector<PassengerRecord> passenger_records; // Vector to contain collected passenger records
