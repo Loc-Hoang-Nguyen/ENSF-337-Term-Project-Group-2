@@ -31,9 +31,9 @@ Flight* Airline::findFlight()
     std::cout << "Enter the flight number: "; // Input instructions
     std::cin >> index; // Get input
 
-    if (index < flights.size() && index >= 0) // If the received input is in range (not below 0 or above the vector length)
+    if (index <= flights.size() && index >= 1) // If the received input is in range (not below 0 or above the vector length)
     {
-        Flight f = flights[index]; // Get the flight at that index (mostly to make output nicer)
+        Flight& f = flights[index - 1]; // Get the flight at that index (mostly to make output nicer)
 
         std::cout << "You have selected flight " << f.getFlightCode() << " from " 
         << f.getOrigin() << " to " << f.getDestination() << "." << std::endl; // Output
@@ -62,7 +62,7 @@ bool Airline::loadData()
         std::vector<PassengerRecord> passenger_records; // Vector to contain collected passenger records
 
         // Read passenger records from the constant filepath, store records in the vector and errors in the same string as before
-        if (readPassengerRecords(PASSENGERS_FILEPATH, passenger_records, error_message)); // If passengers are read successfully
+        if (readPassengerRecords(PASSENGERS_FILEPATH, passenger_records, error_message)) // If passengers are read successfully
         {
             bool success = true; // Boolean for if everything was successful
 
