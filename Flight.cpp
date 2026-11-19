@@ -38,6 +38,17 @@ const std::string& Flight::getFlightCode() const
     return flight_code;
 }
 
+const std::string& Flight::getOrigin() const
+{
+    return origin;
+}
+
+const std::string& Flight::getDestination() const
+{
+    return destination;
+}
+
+
 void Flight::getPassengerRecords(std::vector<PassengerRecord> &records) const
 {
     (void)records;

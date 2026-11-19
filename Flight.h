@@ -90,6 +90,16 @@ class Flight {
          *  Return flight_code
          */
 
+        const std::string& getOrigin() const;
+        /* PROMISE
+         *  Return origin
+         */
+
+        const std::string& getDestination() const;
+        /* PROMISE
+         *  Return destination
+         */
+
         void getPassengerRecords(std::vector<PassengerRecord> &records) const;
         /* PROMISE
          *  Insert the getRecord() from all Passenger to the vector of PassengerRecord (records)
