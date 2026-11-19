@@ -54,6 +54,78 @@ void Flight::displayFlight() const
 
 void Flight::addPassenger()
 {
+    PassengerRecord record;
+    char c; //Used to clear buffer
+
+    //Prompt the user for ID
+    std::cout << "Please enter the passenger id: ";
+    std::cin >> record.passenger_id;
+    if( record.passenger_id<0 ){
+        std::cout << "The passenger ID was negative." << std::endl;
+        return;
+    }
+
+    if( record.passenger_id>(int)(pow(10, P_ID_SIZE) - 1) ){
+        std::cout << "The passenger ID exceeded 5 digits." << std::endl;
+        return;
+    }
+
+    //Buffer clearing
+    do{
+        c = std::cin.get();
+    }while(c!='\n' || c!=EOF);
+
+    //Prompt the user for first name
+    std::cout << "Please enter the passenger first name: ";
+    std::cin >> record.first_name;
+    if( record.first_name.size() > P_NAME_SIZE ){
+        std::cout << "The passenger first name exceeded the letter limit, please truncate them to " + P_NAME_SIZE + '.' << std::endl;
+        return;
+    }
+
+    //Buffer clearing
+    do{
+        c = std::cin.get();
+    }while(c!='\n' || c!=EOF);
+
+    //Prompt the user for last name
+    std::cout << "Please enter the passenger last name: ";
+    std::cin >> record.last_name;
+    if( record.first_name.size() > P_NAME_SIZE ){
+        std::cout << "The passenger last name exceeded the letter limit, please truncate them to " + P_NAME_SIZE + '.' << std::endl;
+        return;
+    }
+
+    //Buffer clearing
+    do{
+        c = std::cin.get();
+    }while(c!='\n' || c!=EOF);
+
+    //Prompt the user for last name
+    std::cout << "Please enter the passenger phone number: ";
+    std::cin >> record.phone_number;
+    if( record.phone_number.size() > P_PHONE_SIZE || record.phone_number[3]!='-' || record.phone_number[7]!='-' ){
+        std::cout << "The passenger phone number is not in the correct format, please correct it to the xxx-xxx-xxxx format." << std::endl;
+        return;        
+    }
+
+    //Buffer clearing
+    do{
+        c = std::cin.get();
+    }while(c!='\n' || c!=EOF);
+
+    if( record.seat_row > number_of_rows ){
+        "A passenger seat row number exceeded number of rows available.";
+        return;
+    }
+
+    if( (record.seat_letter - 'A' + 1) > seats_per_row ){
+        "A passenger seat letter exceeded the number of seats available per row.";
+        return;
+    }
+
+    passengers.emplace_back( record );
+
     return;
 }
 
@@ -119,6 +191,16 @@ bool Flight::addPassengerInternal(const PassengerRecord &record, std::string &er
     if( record.passenger_id>(int)(pow(10, P_ID_SIZE) - 1) ){
         err_msg = "A passenger ID exceeded 5 digits.";
         return false;
+    }
+
+    if( record.first_name.size() > P_NAME_SIZE || record.last_name.size() > P_NAME_SIZE ){
+        err_msg = "A passenger name exceeded the letter limit, please truncate them to " + P_NAME_SIZE + '.';
+        return false;
+    }
+
+    if( record.phone_number.size() > P_PHONE_SIZE || record.phone_number[3]!='-' || record.phone_number[7]!='-' ){
+        err_msg = "A passenger phone number is not in the correct format, please correct it to the xxx-xxx-xxxx format.";
+        return false;        
     }
 
     if( record.seat_row > number_of_rows ){
