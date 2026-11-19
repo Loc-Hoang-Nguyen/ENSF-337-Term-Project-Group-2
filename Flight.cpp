@@ -77,7 +77,7 @@ void Flight::addPassenger()
     std::cout << "Please enter the passenger id: ";
     if(!(std::cin >> record.passenger_id)){
         clearInputBuffer();
-        std::cout << "Error: Please enter a number." << std::endl;
+        std::cerr << "Error: Please enter a number." << std::endl;
         return;
     }
     clearInputBuffer();
@@ -101,7 +101,7 @@ void Flight::addPassenger()
     std::cout << "Enter the passenger's desired row: ";
     if(!(std::cin >> record.seat_row)){
         clearInputBuffer();
-        std::cout << "Error: Please enter a number." << std::endl;
+        std::cerr << "Error: Please enter a number." << std::endl;
         return;
     }
     clearInputBuffer();
@@ -113,7 +113,7 @@ void Flight::addPassenger()
 
     std::string err_msg;
     if( !addPassengerInternal( record, err_msg ) ){
-        std::cout << "Error: " << err_msg << std::endl;
+        std::cerr << "Error: " << err_msg << std::endl;
         return;
     }
 
