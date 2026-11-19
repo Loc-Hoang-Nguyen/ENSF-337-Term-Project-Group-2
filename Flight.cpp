@@ -61,6 +61,11 @@ void Flight::displayPassengers() const
 
 void Flight::displayFlight() const
 {
+    std::cout << std::setw(F_CODE_SIZE) << std::left << flight_code << "   "
+            << std::setw(F_ORG_SIZE) << std::left << origin << "  "
+            << std::setw(F_DEST_SIZE) << std::left << destination << "  "
+            << std::setw(3) << std::left << number_of_rows << " "
+            << seats_per_row << std::endl;
     return;
 }
 
