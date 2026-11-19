@@ -33,7 +33,7 @@ class Airline{
          *  The person who handle Flight.cpp probably should also handle this
          */
 
-        Flight* findFlight() const;
+        Flight* findFlight();
         /* PROMISE
          *  Prompt the user for the position of the flight they want
          *  Reference option 2 on the D2L example for what to do
