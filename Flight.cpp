@@ -15,6 +15,18 @@ Flight::Flight(const FlightRecord& source) : flight_code(source.flight_code), or
         destination(source.destination), number_of_rows(source.number_of_rows),
         seats_per_row(source.seats_per_row), passengers() {}
 
+void Flight::clearInputBuffer() const
+{
+    //cin.clear() is needed since if user try something like inputing letter to int
+    //it will spontanously explode
+    std::cin.clear();
+    char c;
+    do{
+        c = std::cin.get();
+    }while(c!='\n' && c!=EOF);
+    return;
+}
+
 void Flight::displaySeatMap() const
 {
     std::vector< std::vector<char> > seatMap( number_of_rows, std::vector<char>( seats_per_row, '-' ) );
@@ -55,76 +67,52 @@ void Flight::displayFlight() const
 void Flight::addPassenger()
 {
     PassengerRecord record;
-    char c; //Used to clear buffer
 
     //Prompt the user for ID
     std::cout << "Please enter the passenger id: ";
-    std::cin >> record.passenger_id;
-    if( record.passenger_id<0 ){
-        std::cout << "The passenger ID was negative." << std::endl;
+    if(!(std::cin >> record.passenger_id)){
+        clearInputBuffer();
+        std::cout << "Error: Please enter a number." << std::endl;
         return;
     }
-
-    if( record.passenger_id>(int)(pow(10, P_ID_SIZE) - 1) ){
-        std::cout << "The passenger ID exceeded 5 digits." << std::endl;
-        return;
-    }
-
-    //Buffer clearing
-    do{
-        c = std::cin.get();
-    }while(c!='\n' || c!=EOF);
+    clearInputBuffer();
 
     //Prompt the user for first name
     std::cout << "Please enter the passenger first name: ";
     std::cin >> record.first_name;
-    if( record.first_name.size() > P_NAME_SIZE ){
-        std::cout << "The passenger first name exceeded the letter limit, please truncate them to " + P_NAME_SIZE + '.' << std::endl;
-        return;
-    }
-
-    //Buffer clearing
-    do{
-        c = std::cin.get();
-    }while(c!='\n' || c!=EOF);
+    clearInputBuffer();
 
     //Prompt the user for last name
     std::cout << "Please enter the passenger last name: ";
     std::cin >> record.last_name;
-    if( record.first_name.size() > P_NAME_SIZE ){
-        std::cout << "The passenger last name exceeded the letter limit, please truncate them to " + P_NAME_SIZE + '.' << std::endl;
-        return;
-    }
+    clearInputBuffer();
 
-    //Buffer clearing
-    do{
-        c = std::cin.get();
-    }while(c!='\n' || c!=EOF);
-
-    //Prompt the user for last name
+    //Prompt the user for phone number
     std::cout << "Please enter the passenger phone number: ";
     std::cin >> record.phone_number;
-    if( record.phone_number.size() > P_PHONE_SIZE || record.phone_number[3]!='-' || record.phone_number[7]!='-' ){
-        std::cout << "The passenger phone number is not in the correct format, please correct it to the xxx-xxx-xxxx format." << std::endl;
-        return;        
+    clearInputBuffer();
+
+    //Prompt the user for row number
+    std::cout << "Enter the passenger's desired row: ";
+    if(!(std::cin >> record.seat_row)){
+        clearInputBuffer();
+        std::cout << "Error: Please enter a number." << std::endl;
+        return;
     }
+    clearInputBuffer();
 
-    //Buffer clearing
-    do{
-        c = std::cin.get();
-    }while(c!='\n' || c!=EOF);
+    //Prompt the user for seat letter
+    std::cout << "Enter the passenger's desired seat: ";
+    std::cin >> record.seat_letter;
+    clearInputBuffer();
 
-    if( record.seat_row > number_of_rows ){
-        "A passenger seat row number exceeded number of rows available.";
+    std::string err_msg;
+    if( !addPassengerInternal( record, err_msg ) ){
+        std::cout << "Error: " << err_msg << std::endl;
         return;
     }
 
-    if( (record.seat_letter - 'A' + 1) > seats_per_row ){
-        "A passenger seat letter exceeded the number of seats available per row.";
-        return;
-    }
-
-    passengers.emplace_back( record );
+    std::cout << "Passenger " << record.first_name << " " << record.last_name << " was added to flight " << flight_code << "." << std::endl;
 
     return;
 }
@@ -135,11 +123,7 @@ void Flight::removePassenger()
     std::cout << "Please enter the id of the passenger that needs to be removed: ";
     std::cin >> p_id;
 
-    //Clearing the buffer
-    char c;
-    do{
-        c = std::cin.get();
-    }while(c!='\n' || c!=EOF);
+    clearInputBuffer();
 
     std::cout << std::endl;
 
@@ -198,13 +182,23 @@ bool Flight::addPassengerInternal(const PassengerRecord &record, std::string &er
         return false;
     }
 
-    if( record.phone_number.size() > P_PHONE_SIZE || record.phone_number[3]!='-' || record.phone_number[7]!='-' ){
+    if( record.phone_number.size() != P_PHONE_SIZE || record.phone_number[3]!='-' || record.phone_number[7]!='-' ){
         err_msg = "A passenger phone number is not in the correct format, please correct it to the xxx-xxx-xxxx format.";
         return false;        
     }
 
+    if( record.seat_row <= 0 ){
+        err_msg = "A passenger seat row number is 0 or negative.";
+        return false;
+    }
+
     if( record.seat_row > number_of_rows ){
         err_msg = "A passenger seat row number exceeded number of rows available.";
+        return false;
+    }
+
+    if( record.seat_letter < 'A' || record.seat_letter > 'Z' ){
+        err_msg = "A passenger seat letter is incorrect, please capitalize the row letter.";
         return false;
     }
 
