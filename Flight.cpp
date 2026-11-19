@@ -32,7 +32,7 @@ void Flight::displaySeatMap() const
     std::vector< std::vector<char> > seatMap( number_of_rows, std::vector<char>( seats_per_row, '-' ) );
 
     for(std::size_t i = 0;i<passengers.size();i++){
-        seatMap[ passengers[i].getSeatRow() ][ passengers[i].getSeatLetter() - 'A' ] = 'X';
+        seatMap[ passengers[i].getSeatRow() - 1 ][ passengers[i].getSeatLetter() - 'A' ] = 'X';
     }
 
     std::cout << "Aircraft Seat Map" << std::endl;
