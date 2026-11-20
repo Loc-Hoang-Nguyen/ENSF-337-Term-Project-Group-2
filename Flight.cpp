@@ -15,18 +15,6 @@ Flight::Flight(const FlightRecord& source) : flight_code(source.flight_code), or
         destination(source.destination), number_of_rows(source.number_of_rows),
         seats_per_row(source.seats_per_row), passengers() {}
 
-void Flight::clearInputBuffer() const
-{
-    //cin.clear() is needed since if user try something like inputing letter to int
-    //it will spontanously explode
-    std::cin.clear();
-    char c;
-    do{
-        c = std::cin.get();
-    }while(c!='\n' && c!=EOF);
-    return;
-}
-
 void Flight::displaySeatMap() const
 {
     std::vector< std::vector<char> > seatMap( number_of_rows, std::vector<char>( seats_per_row, '-' ) );
@@ -183,7 +171,7 @@ bool Flight::addPassengerInternal(const PassengerRecord &record, std::string &er
     }
 
     if( record.first_name.size() > P_NAME_SIZE || record.last_name.size() > P_NAME_SIZE ){
-        err_msg = "A passenger name exceeded the letter limit, please truncate them to " + P_NAME_SIZE + '.';
+        err_msg = "A passenger name exceeded the letter limit, please truncate them to " + std::to_string(P_NAME_SIZE) + " letters only.";
         return false;
     }
 

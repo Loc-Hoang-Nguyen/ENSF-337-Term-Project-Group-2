@@ -27,13 +27,6 @@ class Flight {
         int number_of_rows;
         int seats_per_row;
         std::vector<Passenger> passengers;
-
-        void clearInputBuffer() const;
-        /* PROMISE
-         *  Clear the cin buffer
-         * Comment
-         *  Is used A LOT, so seperate out for readability
-         */
     public:
         Flight();
         /* PROMISE

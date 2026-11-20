@@ -19,26 +19,7 @@ void waitForReturn();
  *  Reference the D2L Example for formatting
  */
 
-void clearInputBuffer();
-/* PROMISE
- *  Clear the cin buffer and it's error
- * Comment
- *  Is used A LOT, so seperate out for readability
- */
-
 int main()
 {
     return 0;
-}
-
-void clearInputBuffer()
-{
-    //cin.clear() is needed since if user try something like inputing letter to int
-    //it will spontanously explode
-    std::cin.clear();
-    char c;
-    do{
-        c = std::cin.get();
-    }while(c!='\n' && c!=EOF);
-    return;
 }
