@@ -9,8 +9,8 @@
 #include <iostream>
 #include <iomanip>
 
-#define FLIGHTS_FILEPATH "\\flights.txt"
-#define PASSENGERS_FILEPATH "\\passengers.txt"
+#define FLIGHTS_FILEPATH ".\\flights.txt"
+#define PASSENGERS_FILEPATH ".\\passengers.txt"
 
 Airline::Airline() {}
 
