@@ -31,13 +31,13 @@ Flight* Airline::findFlight()
     std::size_t index; // Input variable
 
     std::cout << "Enter the flight number: "; // Input instructions
-    
-    clearInputBuffer(); // Clear the input buffer before gathering input
 
     // Get input
     if (!(std::cin >> index)) // If input is not correctly received
     {
         std::cout << "Please enter a number between 1 and " << flights.size() << '.' << std::endl; // Error message
+        
+        clearInputBuffer(); // Clear buffer before returning
         return NULL; // Return NULL
     } //Note: technically this index can still be passed through as zero. This just looks a bit more intentional.
     
@@ -53,6 +53,8 @@ Flight* Airline::findFlight()
     // If the received input is OUT of range
     std::cout << "Entered number " << int(index)  << " is out of range. Please enter a number between 1 and " 
     << flights.size() << '.' << std::endl; // Output
+
+    clearInputBuffer(); // Clear buffer before returning
     return NULL; // Return NULL
 }
 
