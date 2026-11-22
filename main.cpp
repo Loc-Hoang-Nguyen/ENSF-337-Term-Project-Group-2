@@ -25,26 +25,37 @@ void waitForReturn();
 int main()
 {
     // SETUP
-    Airline main_airline;
 
-    if (!main_airline.loadData())
+    Airline main_airline; // Create the Airline object
+
+    // Populate the Airline object with data from the hardcoded files
+    if (!main_airline.loadData()) // If failed
     {
-        return 0;
+        std::cout << "Data loading failed, program terminated." << std::endl; // Output
+        return 0; // Return 0 (program cannot continue)
     }
     
-    Flight* selected_flight = NULL;
+    Flight* selected_flight = NULL; // Create a variable to store the selected flight
 
     // USER INTERACTION BEGINS
     
-    std::cout << "Version: PRE1.0\nTerm Project - Flight Management Program in C++\nProduced by: \nYear: 2026" << std::endl;
+    // "Title" message
+    std::cout << "Version: PRE1.0\n"
+    << "Term Project - Flight Management Program in C++\n"
+    << "Produced by: Max MacPhee, [PLEASE ADD YOUR NAMES!]\n"
+    << "Year: 2026" 
+    << std::endl;
     
-    int operation = 0;
-    bool failure = false;
-    
-    bool running = true;
-    while (running)
+    // Stored here just so they don't get deallocated and reallocated every time the loop repeats
+    int operation = 0; // Variable for current operation
+    bool failure = false; // Variable for failure state 
+
+    bool running = true; // Variable for if the program is currently running
+    while (running) // Repeat while the program is running
     {
-        waitForReturn();
+        waitForReturn(); // Wait for a return (always precedes the main menu)
+        
+        // Massive menu output block (formatted for readability)
         std::cout << "Please select one of the following options:\n" 
         << "\t1. Display all flights\n"
         << "\t2. Select a flight\n\n"
@@ -59,42 +70,61 @@ int main()
 
         << "Enter your choice (1-8): ";
 
+        // Read the desired operation from the player, if failed set failure to true
         failure = !(std::cin >> operation);
-        clearInputBuffer();
+        clearInputBuffer(); // Clear the input buffer after getting user input
         
-        if (!failure && operation >= 1 && operation <= 8)
+        if (!failure && operation >= 1 && operation <= 8) // If not failed and operation in range
         {
-            switch(operation)
+            switch(operation) // Switch based on operation
             {
+                // If 1 is entered, display all flights for the airline
                 case 1: main_airline.displayFlights(); break;
+                // If 2 is entered, find a flight to select
                 case 2: selected_flight = main_airline.findFlight(); break;
 
-                case 7: 
-                if (main_airline.savePassengerData()) std::cout << "Passenger data succesfully saved!" << std::endl; 
-                else std::cout << "Passenger data save failed." << std::endl;
-                break;
+                // All the Flight operations are reached via default case
 
+                // If 7 is entered, save passenger data
+                case 7: 
+                    // If the save is successful, output that to the user
+                    if (main_airline.savePassengerData()) std::cout << "Passenger data succesfully saved!" << std::endl; 
+                    //If not, also warn the user (slightly redundant as they'll receive a more specific error msg, but doesn't hurt)
+                    else std::cout << "Passenger data save failed." << std::endl; 
+                    break;
+
+                // If 8 is entered, set running to false (stops the program loop from repeating)
                 case 8: running = false; break;
 
+                // Other entries (Flight operations)
                 default:
-                if (selected_flight != NULL)
-                {
-                    switch(operation)
+                    if (selected_flight != NULL) // If the selected Flight is NOT NULL
                     {
-                        case 3: selected_flight -> displaySeatMap(); break;
-                        case 4: selected_flight -> displayPassengers(); break;
-                        case 5: selected_flight -> addPassenger(); break;
-                        case 6: selected_flight -> removePassenger(); break;
-                    }
-                }
-                else std::cout << "Error: No flight selected" << std::endl;
+                        switch(operation) // Another switch statement for flight operations
+                        {
+                            // If 3 is selected, display the seat map for the selected flight
+                            case 3: selected_flight -> displaySeatMap(); break;
+                            // If 4 is selected, display the passengers for the selected flight
+                            case 4: selected_flight -> displayPassengers(); break;
+                            // If 5 is selected, add a passenger to the selected flight
+                            case 5: selected_flight -> addPassenger(); break;
+                            // If 6 is selected, remove a passenger from the selected flight
+                            case 6: selected_flight -> removePassenger(); break;
+                            // This default case should never trigger, 
+                            // and if it does that means something went horribly wrong internally
+                            default: std::cout << "Internal error: Invalid operation entered switch case." << std::endl; break;
+                        }
+                    } // If there is no selected flight, output and skip the operation
+                    else std::cout << "Error: No flight selected" << std::endl; 
 
-                break;
+                    break;
             }
         }
-        else std::cout << "Invalid operation. Please enter a number from 1 to 8." << std::endl;
+        else std::cout << "Invalid operation. Please enter a number from 1 to 8." << std::endl; // Output invalid input
     }
+    // When the loop ends, print a program termination message before the program ends
     std::cout << "\nProgram terminated. Thank you for using Term Project - Flight Management Program in C++";
+    return 1;
 }
 
 void waitForReturn()
