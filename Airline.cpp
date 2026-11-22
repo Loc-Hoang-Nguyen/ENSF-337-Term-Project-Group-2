@@ -11,10 +11,11 @@
 #include <iostream>
 #include <iomanip>
 
-#define FLIGHTS_FILEPATH ".\\flights.txt"
-#define PASSENGERS_FILEPATH ".\\passengers.txt"
-
-Airline::Airline() {}
+Airline::Airline() 
+{
+    name = "";
+    flights = {};
+}
 
 void Airline::displayFlights() const
 {
@@ -30,14 +31,14 @@ Flight* Airline::findFlight()
 {
     std::size_t index; // Input variable
 
-    std::cout << "Enter the flight number: "; // Input instructions
+    std::cout << "\nEnter the flight number: "; // Input instructions
 
     bool failed = !(std::cin >> index); // Get input, and check if it failed
     clearInputBuffer();
 
     if (failed) // If input is not correctly received
     {
-        std::cout << "Please enter a number between 1 and " << flights.size() << '.' << std::endl; // Error message
+        std::cout << "Please enter a number from 1 to " << flights.size() << '.' << std::endl; // Error message
 
         return NULL; // Return NULL
     } //Note: technically this index can still be passed through as zero. This just looks a bit more intentional.
@@ -52,20 +53,20 @@ Flight* Airline::findFlight()
         return &f; // Return the address of the flight
     }
     // If the received input is OUT of range
-    std::cout << "Entered number " << int(index)  << " is out of range. Please enter a number between 1 and " 
+    std::cout << "Entered number " << int(index)  << " is out of range. Please enter a number from 1 to " 
     << flights.size() << '.' << std::endl; // Output
 
     return NULL; // Return NULL
 }
 
-bool Airline::loadData()
+bool Airline::loadData(const std::string& flights_filepath, const std::string& passengers_filepath)
 {
     std::string error_message; // Container for any error messages that are triggered
 
     std::vector<FlightRecord> flight_records; // Vector to contain collected flight records
 
     // Read flight records from the constant filepath, store records in the vector and errors in the string
-    if (readFlightRecords(FLIGHTS_FILEPATH, flight_records, error_message)) // If flights are read successfully
+    if (readFlightRecords(flights_filepath, flight_records, error_message)) // If flights are read successfully
     {
         for (std::size_t f = 0; f < flight_records.size(); f++) // For each flight record
         {
@@ -75,7 +76,7 @@ bool Airline::loadData()
         std::vector<PassengerRecord> passenger_records; // Vector to contain collected passenger records
 
         // Read passenger records from the constant filepath, store records in the vector and errors in the same string as before
-        if (readPassengerRecords(PASSENGERS_FILEPATH, passenger_records, error_message)) // If passengers are read successfully
+        if (readPassengerRecords(passengers_filepath, passenger_records, error_message)) // If passengers are read successfully
         {
             bool success = true; // Boolean for if everything was successful
 
@@ -95,7 +96,7 @@ bool Airline::loadData()
                 }
                 if (index == -1) // If the index was never changed (flight code never found)
                 {
-                    error_message = "Flight code not found: " + passenger_records[p].flight_code; // Set error message
+                    error_message = "Passenger flight code not found: " + passenger_records[p].flight_code; // Set error message
                     success = false; // Set success to false
                     break; // Break the passenger loop
                 }
@@ -115,7 +116,7 @@ bool Airline::loadData()
     return false; // Return false
 }
 
-bool Airline::savePassengerData() const
+bool Airline::savePassengerData(const std::string& passengers_filepath) const
 {  
     std::vector<PassengerRecord> records; // Vector to store passenger records in
 
@@ -127,7 +128,7 @@ bool Airline::savePassengerData() const
     std::string error_message; // String to store any error messages
 
     // Write all records to the constant filepath from records vector, holding any error message
-    if (writePassengerRecords(PASSENGERS_FILEPATH, records, error_message)) return true; // If successful, return true
+    if (writePassengerRecords(passengers_filepath, records, error_message)) return true; // If successful, return true
     // If unsuccessful
     std::cerr << error_message << std::endl; // Error message
     return false; // Return false
