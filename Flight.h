@@ -27,6 +27,7 @@ class Flight {
         int number_of_rows;
         int seats_per_row;
         std::vector<Passenger> passengers;
+        std::vector< std::vector<char> > seatMap;
     public:
         Flight();
         /* PROMISE
