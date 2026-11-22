@@ -34,7 +34,7 @@ int main()
     if (!main_airline.loadData(FLIGHTS_FILEPATH, PASSENGERS_FILEPATH)) // If failed
     {
         std::cout << "Data loading failed, program terminated." << std::endl; // Output
-        return 0; // Return 0 (program cannot continue)
+        return 1; // Return 1 (program cannot continue, there is an issue)
     }
     
     Flight* selected_flight = NULL; // Create a variable to store the selected flight
@@ -126,7 +126,7 @@ int main()
     }
     // When the loop ends, print a program termination message before the program ends
     std::cout << "\nProgram terminated. Thank you for using Term Project - Flight Management Program in C++";
-    return 1;
+    return 0; // (no issue)
 }
 
 void waitForReturn()
