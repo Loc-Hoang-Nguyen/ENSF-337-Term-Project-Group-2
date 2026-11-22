@@ -11,6 +11,9 @@
 #include "Airline.h"
 #include "Airline_utility.h"
 
+#define FLIGHTS_FILEPATH ".\\flights.txt"
+#define PASSENGERS_FILEPATH ".\\passengers.txt"
+
 #define RETURN_CHAR '\n'
 
 void waitForReturn();
@@ -29,7 +32,7 @@ int main()
     Airline main_airline; // Create the Airline object
 
     // Populate the Airline object with data from the hardcoded files
-    if (!main_airline.loadData()) // If failed
+    if (!main_airline.loadData(FLIGHTS_FILEPATH, PASSENGERS_FILEPATH)) // If failed
     {
         std::cout << "Data loading failed, program terminated." << std::endl; // Output
         return 0; // Return 0 (program cannot continue)
@@ -88,7 +91,7 @@ int main()
                 // If 7 is entered, save passenger data
                 case 7: 
                     // If the save is successful, output that to the user
-                    if (main_airline.savePassengerData()) std::cout << "Passenger data succesfully saved!" << std::endl; 
+                    if (main_airline.savePassengerData(PASSENGERS_FILEPATH)) std::cout << "Passenger data succesfully saved!" << std::endl; 
                     //If not, also warn the user (slightly redundant as they'll receive a more specific error msg, but doesn't hurt)
                     else std::cout << "Passenger data save failed." << std::endl; 
                     break;
