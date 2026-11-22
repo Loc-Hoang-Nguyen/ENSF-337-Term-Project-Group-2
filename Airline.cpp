@@ -59,7 +59,7 @@ Flight* Airline::findFlight()
     return NULL; // Return NULL
 }
 
-bool Airline::loadData(std::string& flights_filepath, std::string& passengers_filepath)
+bool Airline::loadData(const std::string& flights_filepath, const std::string& passengers_filepath)
 {
     std::string error_message; // Container for any error messages that are triggered
 
@@ -116,7 +116,7 @@ bool Airline::loadData(std::string& flights_filepath, std::string& passengers_fi
     return false; // Return false
 }
 
-bool Airline::savePassengerData(std::string& passengers_filepath) const
+bool Airline::savePassengerData(const std::string& passengers_filepath) const
 {  
     std::vector<PassengerRecord> records; // Vector to store passenger records in
 

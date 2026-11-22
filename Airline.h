@@ -42,7 +42,7 @@ class Airline{
          *  Return the pointer to that Flight if successful, otherwise return NULL 
          */
 
-        bool loadData(std::string& flights_filepath, std::string& passengers_filepath);
+        bool loadData(const std::string& flights_filepath, const std::string& passengers_filepath);
         /* PROMISE
          *  Load the data from a file in a hardcoded path
          *  Return true if successful, false if not, and when return false, also cerr the error_message
@@ -56,7 +56,7 @@ class Airline{
          *  it can easily switch to a different file.
          */
 
-        bool savePassengerData(std::string& passengers_filepath) const;
+        bool savePassengerData(const std::string& passengers_filepath) const;
         /* PROMISE
          *  Save the data from a file in a hardcoded path
          *  Return true if successful, false if not
