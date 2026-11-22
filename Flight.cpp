@@ -159,42 +159,42 @@ void Flight::getPassengerRecords(std::vector<PassengerRecord> &records) const
 bool Flight::addPassengerInternal(const PassengerRecord &record, std::string &err_msg)
 {
     if( record.passenger_id<0 ){
-        err_msg = "A passenger ID was negative.";
+        err_msg = "The passenger ID was negative.";
         return false;
     }
 
     if( record.passenger_id>(int)(pow(10, P_ID_SIZE) - 1) ){
-        err_msg = "A passenger ID exceeded 5 digits.";
+        err_msg = "The passenger ID exceeded +" + std::to_string(P_ID_SIZE) + " digits.";
         return false;
     }
 
     if( record.first_name.size() > P_NAME_SIZE || record.last_name.size() > P_NAME_SIZE ){
-        err_msg = "A passenger name exceeded the letter limit, please truncate them to " + std::to_string(P_NAME_SIZE) + " letters only.";
+        err_msg = "The passenger's first or last name exceeded the letter limit, please truncate them to " + std::to_string(P_NAME_SIZE) + " letters only.";
         return false;
     }
 
     if( record.phone_number.size() != P_PHONE_SIZE || record.phone_number[3]!='-' || record.phone_number[7]!='-' ){
-        err_msg = "A passenger phone number is not in the correct format, please correct it to the xxx-xxx-xxxx format.";
+        err_msg = "The phone number was not in the correct format, please correct it to the xxx-xxx-xxxx format.";
         return false;        
     }
 
     if( record.seat_row <= 0 ){
-        err_msg = "A passenger seat row number is 0 or negative.";
+        err_msg = "The seat row number was 0 or negative.";
         return false;
     }
 
     if( record.seat_row > number_of_rows ){
-        err_msg = "A passenger seat row number exceeded number of rows available.";
+        err_msg = "The rows available for flight " + flight_code + " is only up to " + std::to_string(number_of_rows);
         return false;
     }
 
     if( record.seat_letter < 'A' || record.seat_letter > 'Z' ){
-        err_msg = "A passenger seat letter is incorrect, it must a capitalized letter.";
+        err_msg = "The seat letter was incorrect, it must a capitalized letter.";
         return false;
     }
 
     if( (record.seat_letter - 'A' + 1) > seats_per_row ){
-        err_msg = "A passenger seat letter exceeded the number of seats available per row.";
+        err_msg = "The number of seats per row available for flight " + flight_code + " is only up to " + std::to_string(seats_per_row);
         return false;
     }
 
