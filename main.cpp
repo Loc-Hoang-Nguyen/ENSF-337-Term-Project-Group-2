@@ -11,18 +11,17 @@
 #include "Airline.h"
 #include "Airline_utility.h"
 
+// Filepaths for flight and passenger data, defined as constants in this program
 #define FLIGHTS_FILEPATH ".\\flights.txt"
 #define PASSENGERS_FILEPATH ".\\passengers.txt"
 
+// Character considered a "return"
 #define RETURN_CHAR '\n'
 
 void waitForReturn();
 /* PROMISE
- *  <<< Press Return to Continue >>>
- *  Prompt the user to press Return to continue, that's it
- *  Can either use cin.get() or cin >> [some string variable];
- *  If use cin.get() make sure to clear the buffer beforehand
- *  Reference the D2L Example for formatting
+ *  Prints "<<< Press ENTER to continue >>>""
+ *  and then waits for the user to input the constant RETURN_CHAR
  */
 
 int main()
