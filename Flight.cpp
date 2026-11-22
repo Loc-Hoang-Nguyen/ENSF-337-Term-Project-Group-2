@@ -9,20 +9,15 @@
 #include <cmath>
 
 Flight::Flight() : flight_code(), origin(),
-        destination(), number_of_rows(), seats_per_row(), passengers() {}
+        destination(), number_of_rows(), seats_per_row(), passengers(), seatMap() {}
 
 Flight::Flight(const FlightRecord& source) : flight_code(source.flight_code), origin(source.origin),
         destination(source.destination), number_of_rows(source.number_of_rows),
-        seats_per_row(source.seats_per_row), passengers() {}
+        seats_per_row(source.seats_per_row), passengers(),
+        seatMap( source.number_of_rows, std::vector<char>( source.seats_per_row, '-' ) ) {}
 
 void Flight::displaySeatMap() const
 {
-    std::vector< std::vector<char> > seatMap( number_of_rows, std::vector<char>( seats_per_row, '-' ) );
-
-    for(std::size_t i = 0;i<passengers.size();i++){
-        seatMap[ passengers[i].getSeatRow() - 1 ][ passengers[i].getSeatLetter() - 'A' ] = 'X';
-    }
-
     std::cout << "Aircraft Seat Map" << std::endl;
 
     std::cout << "   ";
@@ -124,6 +119,9 @@ void Flight::removePassenger()
         if( p_id==passengers[i].getID() ){
             std::cout << "Passenger " << passengers[i].getFirstName() << " " << passengers[i].getLastName()
                     << " was successfully removed from flight " << flight_code << "." << std::endl;
+
+            seatMap[ passengers[i].getSeatRow() - 1 ][ passengers[i].getSeatLetter() - 'A' ] = '-';
+            
             passengers.erase( passengers.begin() + i );
             return;
         }
@@ -191,7 +189,7 @@ bool Flight::addPassengerInternal(const PassengerRecord &record, std::string &er
     }
 
     if( record.seat_letter < 'A' || record.seat_letter > 'Z' ){
-        err_msg = "A passenger seat letter is incorrect, please capitalize the row letter.";
+        err_msg = "A passenger seat letter is incorrect, it must a capitalized letter.";
         return false;
     }
 
@@ -200,6 +198,12 @@ bool Flight::addPassengerInternal(const PassengerRecord &record, std::string &er
         return false;
     }
 
+    if( seatMap[ record.seat_row - 1 ][ record.seat_letter - 'A' ]=='X' ){
+        err_msg = "The seat position " + std::to_string(record.seat_row) + record.seat_letter + " on flight " + flight_code + " has already been occupied.";
+        return false;
+    }
+
+    seatMap[ record.seat_row - 1 ][ record.seat_letter - 'A' ] = 'X';
     passengers.emplace_back( record );
     err_msg.clear();
 
