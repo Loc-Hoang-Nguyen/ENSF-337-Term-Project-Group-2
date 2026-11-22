@@ -30,14 +30,14 @@ Flight* Airline::findFlight()
 {
     std::size_t index; // Input variable
 
-    std::cout << "Enter the flight number: "; // Input instructions
+    std::cout << "\nEnter the flight number: "; // Input instructions
 
     bool failed = !(std::cin >> index); // Get input, and check if it failed
     clearInputBuffer();
 
     if (failed) // If input is not correctly received
     {
-        std::cout << "Please enter a number between 1 and " << flights.size() << '.' << std::endl; // Error message
+        std::cout << "Please enter a number from 1 to " << flights.size() << '.' << std::endl; // Error message
 
         return NULL; // Return NULL
     } //Note: technically this index can still be passed through as zero. This just looks a bit more intentional.
@@ -52,7 +52,7 @@ Flight* Airline::findFlight()
         return &f; // Return the address of the flight
     }
     // If the received input is OUT of range
-    std::cout << "Entered number " << int(index)  << " is out of range. Please enter a number between 1 and " 
+    std::cout << "Entered number " << int(index)  << " is out of range. Please enter a number from 1 to " 
     << flights.size() << '.' << std::endl; // Output
 
     return NULL; // Return NULL
@@ -95,7 +95,7 @@ bool Airline::loadData()
                 }
                 if (index == -1) // If the index was never changed (flight code never found)
                 {
-                    error_message = "Flight code not found: " + passenger_records[p].flight_code; // Set error message
+                    error_message = "Passenger flight code not found: " + passenger_records[p].flight_code; // Set error message
                     success = false; // Set success to false
                     break; // Break the passenger loop
                 }
