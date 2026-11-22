@@ -57,7 +57,7 @@ void Flight::addPassenger()
     PassengerRecord record;
 
     //Prompt the user for ID
-    std::cout << "Please enter the passenger id: ";
+    std::cout << "\nPlease enter the passenger id: ";
     if(!(std::cin >> record.passenger_id)){
         clearInputBuffer();
         std::cerr << "Error: Please enter a number." << std::endl;
@@ -108,9 +108,12 @@ void Flight::addPassenger()
 void Flight::removePassenger()
 {
     int p_id;
-    std::cout << "Please enter the id of the passenger that needs to be removed: ";
-    std::cin >> p_id;
-
+    std::cout << "\nPlease enter the id of the passenger that needs to be removed: ";
+    if(!(std::cin >> p_id)){
+        clearInputBuffer();
+        std::cerr << "Error: Please enter a number." << std::endl;
+        return;
+    }
     clearInputBuffer();
 
     std::cout << std::endl;
