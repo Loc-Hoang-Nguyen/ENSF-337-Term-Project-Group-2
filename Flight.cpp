@@ -39,6 +39,22 @@ void Flight::displaySeatMap() const
 
 void Flight::displayPassengers() const
 {
+    std::cout << std::left
+              << std::setw(P_ID_SIZE)    << "ID" << ' '
+              << std::setw(P_NAME_SIZE)  << "First Name" << ' '
+              << std::setw(P_NAME_SIZE)  << "Last Name" << ' '
+              << std::setw(P_PHONE_SIZE) << "Phone" << ' '
+              << std::setw(3)            << "Row" << ' '
+              << "Seat"
+              << std::endl;
+    
+    std::cout << std::string(P_ID_SIZE + P_NAME_SIZE * 2 + P_PHONE_SIZE + 3 + 4 + 5, '-') << std::endl;
+
+    for(std::size_t i = 0;i<passengers.size();i++){
+        passengers[i].print();
+    }
+
+    std::cout << std::string(P_ID_SIZE + P_NAME_SIZE * 2 + P_PHONE_SIZE + 3 + 4 + 5, '-') << std::endl;
     return;
 }
 
