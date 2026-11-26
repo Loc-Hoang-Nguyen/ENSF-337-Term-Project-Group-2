@@ -204,7 +204,6 @@ bool Flight::addPassengerInternal(const PassengerRecord &record, std::string &er
         return false;        
     }
 
-    // || record.phone_number[3]!='-' || record.phone_number[7]!='-'
     for(int i = 0;i<P_PHONE_SIZE;i++){
         if( i==3 || i==7 ){
             if( record.phone_number[i]!='-' ){
