@@ -187,14 +187,36 @@ bool Flight::addPassengerInternal(const PassengerRecord &record, std::string &er
         return false;
     }
 
+    for(std::size_t i = 0;i<passengers.size();i++){
+        if( record.passenger_id==passengers[i].getID() ){
+            err_msg = "The passenger ID " + std::to_string( record.passenger_id ) + " already exists on flight " + flight_code + ".";
+            return false;
+        }
+    }
+
     if( record.first_name.size() > P_NAME_SIZE || record.last_name.size() > P_NAME_SIZE ){
         err_msg = "The passenger's first or last name exceeded the letter limit, please truncate them to " + std::to_string(P_NAME_SIZE) + " letters only.";
         return false;
     }
 
-    if( record.phone_number.size() != P_PHONE_SIZE || record.phone_number[3]!='-' || record.phone_number[7]!='-' ){
-        err_msg = "The phone number was not in the correct format, please correct it to the xxx-xxx-xxxx format.";
+    if( record.phone_number.size() != P_PHONE_SIZE ){
+        err_msg = "The phone number was not in the correct format, please correct it to the xxx-xxx-xxxx format, with \'x\' as numbers.";
         return false;        
+    }
+
+    // || record.phone_number[3]!='-' || record.phone_number[7]!='-'
+    for(int i = 0;i<P_PHONE_SIZE;i++){
+        if( i==3 || i==7 ){
+            if( record.phone_number[i]!='-' ){
+                err_msg = "The phone number was not in the correct format, please correct it to the xxx-xxx-xxxx format, with \'x\' as numbers.";
+                return false;  
+            }
+        }else{
+            if( record.phone_number[i]<'0' || record.phone_number[i]>'9' ){
+                err_msg = "The phone number was not in the correct format, please correct it to the xxx-xxx-xxxx format, with \'x\' as numbers.";
+                return false;
+            }
+        }
     }
 
     if( record.seat_row <= 0 ){
