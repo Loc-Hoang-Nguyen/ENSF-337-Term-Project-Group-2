@@ -19,7 +19,7 @@ Airline::Airline()
 
 void Airline::displayFlights() const
 {
-    std::cout << "Here is the list of available flights:\n" << std::endl;
+    std::cout << "\nHere is the list of available flights:\n" << std::endl;
     for(std::size_t i = 0;i<flights.size();i++){
         std::cout << "   " << std::setw(4) << std::left << std::to_string(i+1) + '.';
         flights[i].displayFlight();
