@@ -183,7 +183,7 @@ bool Flight::addPassengerInternal(const PassengerRecord &record, std::string &er
     }
 
     if( record.passenger_id>(int)(pow(10, P_ID_SIZE) - 1) ){
-        err_msg = "The passenger ID exceeded +" + std::to_string(P_ID_SIZE) + " digits.";
+        err_msg = "The passenger ID exceeded " + std::to_string(P_ID_SIZE) + " digits.";
         return false;
     }
 
