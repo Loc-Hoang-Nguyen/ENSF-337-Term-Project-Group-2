@@ -1,0 +1,10 @@
+AC436 Toronto Calgary 28 8 
+WS195 Edmonton Montreal 7 10 
+PD450 Toronto Montreal 8 8 
+F8100 Toronto Edmonton 19 7 
+AJ174 Victoria Vancouver 6 1 
+ME325 Montreal Calgary 2 25 
+SW460 Calgary Calgary 23 3 
+VA530 Edmonton Victoria 39 3 
+JJ991 Edmonton Vancouver 4 25 
+FT800 Montreal Vancouver 2 13 
