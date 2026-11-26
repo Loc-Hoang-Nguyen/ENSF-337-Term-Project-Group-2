@@ -12,8 +12,17 @@
 #include "Airline_utility.h"
 
 // Filepaths for flight and passenger data, defined as constants in this program
+#ifndef TEST2
+
 #define FLIGHTS_FILEPATH ".\\flights.txt"
 #define PASSENGERS_FILEPATH ".\\passengers.txt"
+
+#else
+
+#define FLIGHTS_FILEPATH ".\\flights_test2.txt"
+#define PASSENGERS_FILEPATH ".\\passengers_test2.txt"
+
+#endif
 
 // Character considered a "return"
 #define RETURN_CHAR '\n'

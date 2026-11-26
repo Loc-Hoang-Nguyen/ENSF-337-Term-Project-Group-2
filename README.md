@@ -20,5 +20,17 @@ clang++ -std=c++17 -Wall -Wextra -Wpedantic main.cpp Airline_utility.cpp Passeng
 You can create test.cpp to test the functionality of your codes, it won't be committed.
 main.exe will also not be committed.
 
-As for the -D flag for testing file, we can do it later.
-Might be a good idea to mark the -DTEST2 for accessing flights_test2.txt and passengers_test2.txt
+When compiling for test case 2, use the following:
+For Windows:
+g++ -std=c++17 -Wall -Wextra -Wpedantic -DTEST2 main.cpp Airline_utility.cpp Passenger.cpp Flight.cpp Airline.cpp FileRecordIO.cpp -o test2.exe
+
+For Macs:
+clang++ -std=c++17 -Wall -Wextra -Wpedantic -DTEST2 main.cpp Airline_utility.cpp Passenger.cpp Flight.cpp Airline.cpp FileRecordIO.cpp -o test2.exe
+
+# Test case 2 generation
+To re-generate test case 2:
+Compile with the following flags:
+-std=c++17 -Wall -Wextra -Wpedantic generator.cpp Airline_utility.cpp Passenger.cpp Flight.cpp FileRecordIO.cpp -o generator.exe
+
+Then run with:
+.\generator.exe
