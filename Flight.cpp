@@ -18,7 +18,7 @@ Flight::Flight(const FlightRecord& source) : flight_code(source.flight_code), or
 
 void Flight::displaySeatMap() const
 {
-    std::cout << "Aircraft Seat Map" << std::endl;
+    std::cout << "\nAircraft Seat Map" << std::endl;
 
     std::cout << "   ";
     for(int i = 0;i<seats_per_row;i++){
@@ -40,7 +40,7 @@ void Flight::displaySeatMap() const
 void Flight::displayPassengers() const
 {
     std::cout << std::left
-              << std::setw(P_ID_SIZE)    << "ID" << ' '
+              << std::setw(P_ID_SIZE)    << "\nID" << ' '
               << std::setw(P_NAME_SIZE)  << "First Name" << ' '
               << std::setw(P_NAME_SIZE)  << "Last Name" << ' '
               << std::setw(P_PHONE_SIZE) << "Phone" << ' '

@@ -19,7 +19,7 @@ Airline::Airline()
 
 void Airline::displayFlights() const
 {
-    std::cout << "Here is the list of available flights:\n" << std::endl;
+    std::cout << "\nHere is the list of available flights:\n" << std::endl;
     for(std::size_t i = 0;i<flights.size();i++){
         std::cout << "   " << std::setw(4) << std::left << std::to_string(i+1) + '.';
         flights[i].displayFlight();
@@ -118,18 +118,34 @@ bool Airline::loadData(const std::string& flights_filepath, const std::string& p
 
 bool Airline::savePassengerData(const std::string& passengers_filepath) const
 {  
-    std::vector<PassengerRecord> records; // Vector to store passenger records in
+    // Instructions
+    std::cout << "\nSave the updated passenger data to " << passengers_filepath << "? (Y or N): ";
 
-    for (std::size_t f = 0; f < flights.size(); f++) // For each flight
-    {
-        flights[f].getPassengerRecords(records); // Get all passenger records for the flight, and append them to records
-    }
+    char operation; // Variable to store the input choice
+
+    bool failure = !(std::cin >> operation); // Get input for operation and flag if it failed
+    clearInputBuffer(); // Clear the input buffer
 
     std::string error_message; // String to store any error messages
+    // If not failed and Y or N was entered (either valid case)
+    if (!failure && (toupper(operation) == 'Y' || toupper(operation) == 'N'))
+    {
+        if (toupper(operation) == 'Y') // If Y was entered
+        {
+            std::vector<PassengerRecord> records; // Vector to store passenger records in
 
-    // Write all records to the constant filepath from records vector, holding any error message
-    if (writePassengerRecords(passengers_filepath, records, error_message)) return true; // If successful, return true
-    // If unsuccessful
-    std::cerr << error_message << std::endl; // Error message
+            for (std::size_t f = 0; f < flights.size(); f++) // For each flight
+            {
+                flights[f].getPassengerRecords(records); // Get all passenger records for the flight, and append them to records
+            }
+            // Write all records to the constant filepath from records vector, holding any error message
+            if (writePassengerRecords(passengers_filepath, records, error_message)) return true; // If successful, return true
+        } // If N was entered, do not actually save data
+
+    } // If failed or something other than Y or N was entered, set the error message
+    else error_message = "Invalid entry. Please enter \'Y\' or \'N\'.";
+    
+    // If data was NOT saved
+    if (error_message.size() > 0) std::cerr << error_message << std::endl; // If an error message was set, print it
     return false; // Return false
 }

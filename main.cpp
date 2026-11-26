@@ -89,11 +89,11 @@ int main()
 
                 // If 7 is entered, save passenger data
                 case 7: 
-                    // If the save is successful, output that to the user
-                    if (main_airline.savePassengerData(PASSENGERS_FILEPATH)) std::cout << "Passenger data succesfully saved!" << std::endl; 
-                    //If not, also warn the user (slightly redundant as they'll receive a more specific error msg, but doesn't hurt)
-                    else std::cout << "Passenger data save failed." << std::endl; 
-                    break;
+                    if (main_airline.savePassengerData(PASSENGERS_FILEPATH)) 
+                        std::cout << "All passenger data succesfully saved!" << std::endl; 
+                    else std::cout << "Passenger data was not saved." << std::endl; 
+
+                    break; // End this case
 
                 // If 8 is entered, set running to false (stops the program loop from repeating)
                 case 8: running = false; break;
