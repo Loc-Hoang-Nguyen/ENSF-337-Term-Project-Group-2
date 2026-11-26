@@ -89,27 +89,9 @@ int main()
 
                 // If 7 is entered, save passenger data
                 case 7: 
-                    // Instructions
-                    std::cout << "\nSave the updated passenger data to " << PASSENGERS_FILEPATH << "? (Y or N): ";
-
-                    char decision; // Variable to store the input decision (I could reuse operation, but that's kind of ugly)
-
-                    failure = !(std::cin >> decision); // Get input for decision and flag if it failed
-                    clearInputBuffer(); // Clear the input buffer
-
-                    // If not failed and Y or N was entered (either case)
-                    if (!failure && (toupper(decision) == 'Y' || toupper(decision) == 'N'))
-                    {
-                        if (toupper(decision) == 'Y') // If Y was entered
-                        {
-                            // If the save is successful, output that to the user
-                            if (main_airline.savePassengerData(PASSENGERS_FILEPATH)) std::cout << "All passenger data succesfully saved!" << std::endl; 
-                            //If not, also warn the user (slightly redundant as they'll receive a more specific error msg, but doesn't hurt)
-                            else std::cout << "Passenger data saving failed." << std::endl; 
-                        } // If N was entered, just tell the user nothing was done
-                        else std::cout << "Passenger data was not saved." << std::endl; 
-                    } // If failed or something other than Y or N was entered, error message
-                    else std::cout << "Invalid entry. Please enter \'Y\' or \'N\'." << std::endl;
+                    if (main_airline.savePassengerData(PASSENGERS_FILEPATH)) 
+                        std::cout << "All passenger data succesfully saved!" << std::endl; 
+                    else std::cout << "Passenger data was not saved." << std::endl; 
 
                     break; // End this case
 
