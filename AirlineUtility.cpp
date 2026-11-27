@@ -1,4 +1,6 @@
-#include "Airline_utility.h"
+// Implements a helper function declared in AirlineUtility.h
+
+#include "AirlineUtility.h"
 
 #include <iostream>
 

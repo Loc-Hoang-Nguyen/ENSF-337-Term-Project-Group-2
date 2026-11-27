@@ -18,7 +18,7 @@ Flight::Flight(const FlightRecord& source) : flight_code(source.flight_code), or
 
 void Flight::displaySeatMap() const
 {
-    std::cout << "\nAircraft Seat Map" << std::endl;
+    std::cout << "\nSeat map for flight " << flight_code << " from " << origin << " to " << destination << ":" << std::endl;
 
     std::cout << "   ";
     for(int i = 0;i<seats_per_row;i++){
@@ -39,8 +39,9 @@ void Flight::displaySeatMap() const
 
 void Flight::displayPassengers() const
 {
+    std::cout << "\nPassenger list for flight " << flight_code << " from " << origin << " to " << destination << ":" << std::endl;
     std::cout << std::left
-              << std::setw(P_ID_SIZE)    << "\nID" << ' '
+              << std::setw(P_ID_SIZE)    << "ID" << ' '
               << std::setw(P_NAME_SIZE)  << "First Name" << ' '
               << std::setw(P_NAME_SIZE)  << "Last Name" << ' '
               << std::setw(P_PHONE_SIZE) << "Phone" << ' '
@@ -73,7 +74,7 @@ void Flight::addPassenger()
     PassengerRecord record;
 
     //Prompt the user for ID
-    std::cout << "\nPlease enter the passenger id: ";
+    std::cout << "\nEnter the passenger's ID: ";
     if(!(std::cin >> record.passenger_id)){
         clearInputBuffer();
         std::cerr << "Error: Please enter a number." << std::endl;
@@ -82,17 +83,17 @@ void Flight::addPassenger()
     clearInputBuffer();
 
     //Prompt the user for first name
-    std::cout << "Please enter the passenger first name: ";
+    std::cout << "Enter the passenger's first name: ";
     std::cin >> record.first_name;
     clearInputBuffer();
 
     //Prompt the user for last name
-    std::cout << "Please enter the passenger last name: ";
+    std::cout << "Enter the passenger's last name: ";
     std::cin >> record.last_name;
     clearInputBuffer();
 
     //Prompt the user for phone number
-    std::cout << "Please enter the passenger phone number: ";
+    std::cout << "Enter the passenger's phone number: ";
     std::cin >> record.phone_number;
     clearInputBuffer();
 
@@ -124,7 +125,7 @@ void Flight::addPassenger()
 void Flight::removePassenger()
 {
     int p_id;
-    std::cout << "\nPlease enter the id of the passenger that needs to be removed: ";
+    std::cout << "\nEnter the ID of the passenger to remove: ";
     if(!(std::cin >> p_id)){
         clearInputBuffer();
         std::cerr << "Error: Please enter a number." << std::endl;
@@ -146,7 +147,7 @@ void Flight::removePassenger()
         }
     }
 
-    std::cout << "No passenger with the corresponding id exist in this flight." << std::endl;
+    std::cout << "Error: No passenger with this ID exists in this flight." << std::endl;
 
     return;
 }
@@ -195,24 +196,24 @@ bool Flight::addPassengerInternal(const PassengerRecord &record, std::string &er
     }
 
     if( record.first_name.size() > P_NAME_SIZE || record.last_name.size() > P_NAME_SIZE ){
-        err_msg = "The passenger's first or last name exceeded the letter limit, please truncate them to " + std::to_string(P_NAME_SIZE) + " letters only.";
+        err_msg = "The passenger's first or last name exceeded the character limit. Please truncate them to " + std::to_string(P_NAME_SIZE) + " characters in length.";
         return false;
     }
 
     if( record.phone_number.size() != P_PHONE_SIZE ){
-        err_msg = "The phone number was not in the correct format, please correct it to the xxx-xxx-xxxx format, with \'x\' as numbers.";
+        err_msg = "Invalid phone number format. Please correct it to the xxx-xxx-xxxx format, with \'x\' as numbers.";
         return false;        
     }
 
     for(int i = 0;i<P_PHONE_SIZE;i++){
         if( i==3 || i==7 ){
             if( record.phone_number[i]!='-' ){
-                err_msg = "The phone number was not in the correct format, please correct it to the xxx-xxx-xxxx format, with \'x\' as numbers.";
+                err_msg = "Invalid phone number format. Please correct it to the xxx-xxx-xxxx format, with \'x\' as numbers.";
                 return false;  
             }
         }else{
             if( record.phone_number[i]<'0' || record.phone_number[i]>'9' ){
-                err_msg = "The phone number was not in the correct format, please correct it to the xxx-xxx-xxxx format, with \'x\' as numbers.";
+                err_msg = "Invalid phone number format. Please correct it to the xxx-xxx-xxxx format, with \'x\' as numbers.";
                 return false;
             }
         }
@@ -224,22 +225,22 @@ bool Flight::addPassengerInternal(const PassengerRecord &record, std::string &er
     }
 
     if( record.seat_row > number_of_rows ){
-        err_msg = "The rows available for flight " + flight_code + " is only up to " + std::to_string(number_of_rows);
+        err_msg = "There are only " +  std::to_string(number_of_rows) + " rows in flight " + flight_code + '.';
         return false;
     }
 
     if( record.seat_letter < 'A' || record.seat_letter > 'Z' ){
-        err_msg = "The seat letter was incorrect, it must a capitalized letter.";
+        err_msg = "The seat letter must be a capitalized letter.";
         return false;
     }
 
     if( (record.seat_letter - 'A' + 1) > seats_per_row ){
-        err_msg = "The number of seats per row available for flight " + flight_code + " is only up to " + std::to_string(seats_per_row);
+        err_msg = "There are only " + std::to_string(seats_per_row) + " seats per row in flight " + flight_code + '.';
         return false;
     }
 
     if( seatMap[ record.seat_row - 1 ][ record.seat_letter - 'A' ]=='X' ){
-        err_msg = "The seat position " + std::to_string(record.seat_row) + record.seat_letter + " on flight " + flight_code + " has already been occupied.";
+        err_msg = "The seat position " + std::to_string(record.seat_row) + record.seat_letter + " on flight " + flight_code + " is occupied.";
         return false;
     }
 

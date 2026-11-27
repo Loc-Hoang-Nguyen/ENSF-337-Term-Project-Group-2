@@ -69,3 +69,6 @@ Testing/
 
 # testing file
 test.cpp
+
+# VSCODE
+.vscode

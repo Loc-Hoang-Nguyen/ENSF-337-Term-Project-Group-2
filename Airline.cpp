@@ -1,44 +1,56 @@
-// Implement the Airline member functions declared in Airline.h.
-//
-// Use the supplied FileRecordIO functions when loading and saving records.
-// Convert the loaded FlightRecord and PassengerRecord values into the
-// appropriate Flight and Passenger objects.
-// Ensure each Passenger object is placed in the appropriate Flight object.
-#include "Airline.h"
+// Implements the Airline class declared in Airline.h
 
-#include "Airline_utility.h"
+#include "Airline.h"
 
 #include <iostream>
 #include <iomanip>
 
 Airline::Airline() 
 {
+    // Empty default values
     name = "";
     flights = {};
 }
 
 void Airline::displayFlights() const
 {
-    std::cout << "\nHere is the list of available flights:\n" << std::endl;
-    for(std::size_t i = 0;i<flights.size();i++){
+    // Title (with a small legend to make the header look nicer)
+    std::cout << "\nAvailable flights: (R: Rows, S: Seats per row)" << std::endl; 
+
+    // Print a header
+    std::cout << "   " << std::setw(4) << std::left << '#' 
+            << std::setw(F_CODE_SIZE) << std::left << "Code" << "   "
+            << std::setw(F_ORG_SIZE) << std::left << "Origin" << "  "
+            << std::setw(F_DEST_SIZE) << std::left << "Destination" << "  "
+            << std::setw(3) << std::left << "R" << " S" << std::endl;
+    // Print a separator
+    std::cout << std::string(F_CODE_SIZE + F_ORG_SIZE + F_DEST_SIZE + 22, '-') << std::endl;
+    
+    // Prints each flight object in the Airline
+    for(std::size_t i = 0; i < flights.size(); i++)
+    {
         std::cout << "   " << std::setw(4) << std::left << std::to_string(i+1) + '.';
         flights[i].displayFlight();
     }
-    return;
+    
+    // Print a final separator
+    std::cout << std::string(F_CODE_SIZE + F_ORG_SIZE + F_DEST_SIZE + 22, '-') << std::endl;
+
+    return; // Return
 }
 
 Flight* Airline::findFlight()
 {
     std::size_t index; // Input variable
 
-    std::cout << "\nEnter the flight number: "; // Input instructions
+    std::cout << "\nEnter the desired flight number: "; // Input instructions
 
     bool failed = !(std::cin >> index); // Get input, and check if it failed
     clearInputBuffer();
 
     if (failed) // If input is not correctly received
     {
-        std::cout << "Please enter a number from 1 to " << flights.size() << '.' << std::endl; // Error message
+        std::cout << "Error: Please enter a number from 1 to " << flights.size() << '.' << std::endl; // Error message
 
         return NULL; // Return NULL
     } //Note: technically this index can still be passed through as zero. This just looks a bit more intentional.
@@ -53,7 +65,7 @@ Flight* Airline::findFlight()
         return &f; // Return the address of the flight
     }
     // If the received input is OUT of range
-    std::cout << "Entered number " << int(index)  << " is out of range. Please enter a number from 1 to " 
+    std::cout << "Error: Entered number " << int(index)  << " is out of range. Please enter a number from 1 to " 
     << flights.size() << '.' << std::endl; // Output
 
     return NULL; // Return NULL
@@ -112,7 +124,7 @@ bool Airline::loadData(const std::string& flights_filepath, const std::string& p
     }
     // If flight records are not correctly returned
 
-    std::cerr << error_message << std::endl; // Output whatever error message caused the logic structure to end
+    std::cerr << "Error:" << error_message << std::endl; // Output whatever error message caused the logic structure to end
     return false; // Return false
 }
 
@@ -143,9 +155,9 @@ bool Airline::savePassengerData(const std::string& passengers_filepath) const
         } // If N was entered, do not actually save data
 
     } // If failed or something other than Y or N was entered, set the error message
-    else error_message = "Invalid entry. Please enter \'Y\' or \'N\'.";
+    else error_message = "Error: Please enter \'Y\' or \'N\'.";
     
     // If data was NOT saved
-    if (error_message.size() > 0) std::cerr << error_message << std::endl; // If an error message was set, print it
+    if (error_message.size() > 0) std::cerr << "Error: " << error_message << std::endl; // If an error message was set, print it
     return false; // Return false
 }
