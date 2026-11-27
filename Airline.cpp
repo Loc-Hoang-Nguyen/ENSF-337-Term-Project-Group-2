@@ -50,7 +50,7 @@ Flight* Airline::findFlight()
 
     if (failed) // If input is not correctly received
     {
-        std::cout << "Please enter a number from 1 to " << flights.size() << '.' << std::endl; // Error message
+        std::cout << "Error: Please enter a number from 1 to " << flights.size() << '.' << std::endl; // Error message
 
         return NULL; // Return NULL
     } //Note: technically this index can still be passed through as zero. This just looks a bit more intentional.
@@ -65,7 +65,7 @@ Flight* Airline::findFlight()
         return &f; // Return the address of the flight
     }
     // If the received input is OUT of range
-    std::cout << "Entered number " << int(index)  << " is out of range. Please enter a number from 1 to " 
+    std::cout << "Error: Entered number " << int(index)  << " is out of range. Please enter a number from 1 to " 
     << flights.size() << '.' << std::endl; // Output
 
     return NULL; // Return NULL
@@ -108,7 +108,7 @@ bool Airline::loadData(const std::string& flights_filepath, const std::string& p
                 }
                 if (index == -1) // If the index was never changed (flight code never found)
                 {
-                    error_message = "Passenger flight code not found: " + passenger_records[p].flight_code; // Set error message
+                    error_message = "Error: Passenger flight code not found: " + passenger_records[p].flight_code; // Set error message
                     success = false; // Set success to false
                     break; // Break the passenger loop
                 }
@@ -124,7 +124,7 @@ bool Airline::loadData(const std::string& flights_filepath, const std::string& p
     }
     // If flight records are not correctly returned
 
-    std::cerr << error_message << std::endl; // Output whatever error message caused the logic structure to end
+    std::cerr << "Error:" << error_message << std::endl; // Output whatever error message caused the logic structure to end
     return false; // Return false
 }
 
@@ -155,9 +155,9 @@ bool Airline::savePassengerData(const std::string& passengers_filepath) const
         } // If N was entered, do not actually save data
 
     } // If failed or something other than Y or N was entered, set the error message
-    else error_message = "Invalid entry. Please enter \'Y\' or \'N\'.";
+    else error_message = "Error: Please enter \'Y\' or \'N\'.";
     
     // If data was NOT saved
-    if (error_message.size() > 0) std::cerr << error_message << std::endl; // If an error message was set, print it
+    if (error_message.size() > 0) std::cerr << "Error: " << error_message << std::endl; // If an error message was set, print it
     return false; // Return false
 }

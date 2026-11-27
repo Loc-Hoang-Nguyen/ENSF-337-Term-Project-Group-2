@@ -21,14 +21,14 @@
 #endif
 
 // Character considered a "return"
-#define RETURN_CHAR '\n'
+#define ENTER_CHAR '\n'
 
 // FUNCTIONS
 
 void waitForReturn();
 /* PROMISE
  *  Prints "<<< Press ENTER to continue >>>""
- *  and then waits for the user to input the constant RETURN_CHAR
+ *  and then waits for the user to input the constant ENTER_CHAR
  */
 
 int main()
@@ -130,7 +130,7 @@ int main()
                     break;
             }
         }
-        else std::cout << "Invalid operation. Please enter a number from 1 to 8." << std::endl; // Output invalid input
+        else std::cout << "Error: Invalid operation. Please enter a number from 1 to 8." << std::endl; // Output invalid input
     }
     // When the loop ends, print a program termination message before the program ends
     std::cout << "\nProgram terminated. Thank you for using Term Project - Flight Management Program in C++";
@@ -141,7 +141,7 @@ void waitForReturn()
 {
     std::cout << "\n<<< Press ENTER to continue >>>" << std::endl; // Output
 
-    while (std::cin.get() != RETURN_CHAR); // Wait until the RETURN_CHAR is entered (newline)
+    while (std::cin.get() != ENTER_CHAR); // Wait until the RETURN_CHAR is entered (newline)
     // Note: buffer is not cleared since it will then wait for ANOTHER newline, since this one is already consumed here.
     // This loop is already effectively a mini buffer clear, although no .clear() since cin is not being used with the
     // extraction operator.
