@@ -1,15 +1,11 @@
-// Create the program entry point in this file.
-//
-// Your main function should:
-// - create the Airline object;
-// - load flights.txt and passengers.txt;
-// - keep track of the currently selected flight;
-// - display the menu and read the user's choices;
-// - call the appropriate Airline or Flight operation for each menu choice;
-// - continue until the user chooses to quit.
+// Runs user interface for the Term Project - Flight Management Program in C++
+// Uses Airline, Flight, Passenger, FileRecordIO, Airline_utility
+
 #include <iostream>
 #include "Airline.h"
-#include "Airline_utility.h"
+#include "AirlineUtility.h"
+
+// CONFIG
 
 // Filepaths for flight and passenger data, defined as constants in this program
 #ifndef TEST2
@@ -27,6 +23,8 @@
 // Character considered a "return"
 #define RETURN_CHAR '\n'
 
+// FUNCTIONS
+
 void waitForReturn();
 /* PROMISE
  *  Prints "<<< Press ENTER to continue >>>""
@@ -42,7 +40,8 @@ int main()
     // Populate the Airline object with data from the hardcoded files
     if (!main_airline.loadData(FLIGHTS_FILEPATH, PASSENGERS_FILEPATH)) // If failed
     {
-        std::cout << "Data loading failed, program terminated." << std::endl; // Output
+        std::cout << "Internal error: Data loading from filepaths \"" << FLIGHTS_FILEPATH << "\" and \"" << PASSENGERS_FILEPATH
+        << "\" unsuccessful, program terminated." << std::endl; // Output
         return 1; // Return 1 (program cannot continue, there is an issue)
     }
     
@@ -51,9 +50,9 @@ int main()
     // USER INTERACTION BEGINS
     
     // "Title" message
-    std::cout << "Version: PRE1.0\n"
+    std::cout << "\nVersion: PRE1.0\n"
     << "Term Project - Flight Management Program in C++\n"
-    << "Produced by: Max MacPhee, [PLEASE ADD YOUR NAMES!]\n"
+    << "Produced by: Max MacPhee, Loc Hoang Nguyen, Malik Ali Imran Khan\n"
     << "Year: 2026" 
     << std::endl;
     
@@ -71,10 +70,10 @@ int main()
         << "\t1. Display all flights\n"
         << "\t2. Select a flight\n\n"
 
-        << "\t3. Display flight seat map\n"
-        << "\t4. Display passenger list\n"
-        << "\t5. Add a new passenger\n"
-        << "\t6. Remove an existing passenger\n\n"
+        << "\t3. Display seat map for selected flight\n"
+        << "\t4. Display passenger list for selected flight\n"
+        << "\t5. Add a new passenger to selected flight\n"
+        << "\t6. Remove an existing passenger from selected flight\n\n"
 
         << "\t7. Save passenger data for all flights\n"
         << "\t8. Quit program\n\n"

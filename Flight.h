@@ -10,6 +10,7 @@
 
 #include "FileRecordIO.h"
 #include "Passenger.h"
+#include "AirlineUtility.h"
 
 #include <string>
 #include <vector>
