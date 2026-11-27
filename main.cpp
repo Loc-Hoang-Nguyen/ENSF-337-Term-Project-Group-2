@@ -53,7 +53,7 @@ int main()
     // "Title" message
     std::cout << "Version: PRE1.0\n"
     << "Term Project - Flight Management Program in C++\n"
-    << "Produced by: Max MacPhee, [PLEASE ADD YOUR NAMES!]\n"
+    << "Produced by: Max MacPhee, Loc Hoang Nguyen, Malik Ali Imran Khan\n"
     << "Year: 2026" 
     << std::endl;
     
