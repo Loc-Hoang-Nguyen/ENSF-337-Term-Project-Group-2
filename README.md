@@ -12,25 +12,25 @@ Make sure to clear the input buffer with clearInputBuffer after every input to p
 # Compilation and testing
 When compiling, use the following:
 For Windows:
-g++ -std=c++17 -Wall -Wextra -Wpedantic main.cpp Airline_utility.cpp Passenger.cpp Flight.cpp Airline.cpp FileRecordIO.cpp -o main.exe
+g++ -std=c++17 -Wall -Wextra -Wpedantic main.cpp AirlineUtility.cpp Passenger.cpp Flight.cpp Airline.cpp FileRecordIO.cpp -o main.exe
 
 For Macs (not sure, I'm using Windows):
-clang++ -std=c++17 -Wall -Wextra -Wpedantic main.cpp Airline_utility.cpp Passenger.cpp Flight.cpp Airline.cpp FileRecordIO.cpp -o main.exe
+clang++ -std=c++17 -Wall -Wextra -Wpedantic main.cpp AirlineUtility.cpp Passenger.cpp Flight.cpp Airline.cpp FileRecordIO.cpp -o main.exe
 
 You can create test.cpp to test the functionality of your codes, it won't be committed.
 main.exe will also not be committed.
 
 When compiling for test case 2, use the following:
 For Windows:
-g++ -std=c++17 -Wall -Wextra -Wpedantic -DTEST2 main.cpp Airline_utility.cpp Passenger.cpp Flight.cpp Airline.cpp FileRecordIO.cpp -o test2.exe
+g++ -std=c++17 -Wall -Wextra -Wpedantic -DTEST2 main.cpp AirlineUtility.cpp Passenger.cpp Flight.cpp Airline.cpp FileRecordIO.cpp -o test2.exe
 
 For Macs:
-clang++ -std=c++17 -Wall -Wextra -Wpedantic -DTEST2 main.cpp Airline_utility.cpp Passenger.cpp Flight.cpp Airline.cpp FileRecordIO.cpp -o test2.exe
+clang++ -std=c++17 -Wall -Wextra -Wpedantic -DTEST2 main.cpp AirlineUtility.cpp Passenger.cpp Flight.cpp Airline.cpp FileRecordIO.cpp -o test2.exe
 
 # Test case 2 generation
 To re-generate test case 2:
 Compile with the following flags:
--std=c++17 -Wall -Wextra -Wpedantic generator.cpp Airline_utility.cpp Passenger.cpp Flight.cpp FileRecordIO.cpp -o generator.exe
+-std=c++17 -Wall -Wextra -Wpedantic generator.cpp AirlineUtility.cpp Passenger.cpp Flight.cpp FileRecordIO.cpp -o generator.exe
 
 Then run with:
 .\generator.exe

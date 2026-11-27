@@ -179,68 +179,68 @@ void Flight::getPassengerRecords(std::vector<PassengerRecord> &records) const
 bool Flight::addPassengerInternal(const PassengerRecord &record, std::string &err_msg)
 {
     if( record.passenger_id<0 ){
-        err_msg = "Error: The passenger ID was negative.";
+        err_msg = "The passenger ID was negative.";
         return false;
     }
 
     if( record.passenger_id>(int)(pow(10, P_ID_SIZE) - 1) ){
-        err_msg = "Error: The passenger ID exceeded " + std::to_string(P_ID_SIZE) + " digits.";
+        err_msg = "The passenger ID exceeded " + std::to_string(P_ID_SIZE) + " digits.";
         return false;
     }
 
     for(std::size_t i = 0;i<passengers.size();i++){
         if( record.passenger_id==passengers[i].getID() ){
-            err_msg = "Error: The passenger ID " + std::to_string( record.passenger_id ) + " already exists on flight " + flight_code + ".";
+            err_msg = "The passenger ID " + std::to_string( record.passenger_id ) + " already exists on flight " + flight_code + ".";
             return false;
         }
     }
 
     if( record.first_name.size() > P_NAME_SIZE || record.last_name.size() > P_NAME_SIZE ){
-        err_msg = "Error: The passenger's first or last name exceeded the character limit. Please truncate them to " + std::to_string(P_NAME_SIZE) + " characters in length.";
+        err_msg = "The passenger's first or last name exceeded the character limit. Please truncate them to " + std::to_string(P_NAME_SIZE) + " characters in length.";
         return false;
     }
 
     if( record.phone_number.size() != P_PHONE_SIZE ){
-        err_msg = "Error: Invalid phone number format. Please correct it to the xxx-xxx-xxxx format, with \'x\' as numbers.";
+        err_msg = "Invalid phone number format. Please correct it to the xxx-xxx-xxxx format, with \'x\' as numbers.";
         return false;        
     }
 
     for(int i = 0;i<P_PHONE_SIZE;i++){
         if( i==3 || i==7 ){
             if( record.phone_number[i]!='-' ){
-                err_msg = "Error: Invalid phone number format. Please correct it to the xxx-xxx-xxxx format, with \'x\' as numbers.";
+                err_msg = "Invalid phone number format. Please correct it to the xxx-xxx-xxxx format, with \'x\' as numbers.";
                 return false;  
             }
         }else{
             if( record.phone_number[i]<'0' || record.phone_number[i]>'9' ){
-                err_msg = "Error: Invalid phone number format. Please correct it to the xxx-xxx-xxxx format, with \'x\' as numbers.";
+                err_msg = "Invalid phone number format. Please correct it to the xxx-xxx-xxxx format, with \'x\' as numbers.";
                 return false;
             }
         }
     }
 
     if( record.seat_row <= 0 ){
-        err_msg = "Error: The seat row number was 0 or negative.";
+        err_msg = "The seat row number was 0 or negative.";
         return false;
     }
 
     if( record.seat_row > number_of_rows ){
-        err_msg = "Error: There are only " +  std::to_string(number_of_rows) + " rows in flight " + flight_code + '.';
+        err_msg = "There are only " +  std::to_string(number_of_rows) + " rows in flight " + flight_code + '.';
         return false;
     }
 
     if( record.seat_letter < 'A' || record.seat_letter > 'Z' ){
-        err_msg = "Error: The seat letter must be a capitalized letter.";
+        err_msg = "The seat letter must be a capitalized letter.";
         return false;
     }
 
     if( (record.seat_letter - 'A' + 1) > seats_per_row ){
-        err_msg = "Error: There are only " + std::to_string(seats_per_row) + " seats per row in flight " + flight_code + '.';
+        err_msg = "There are only " + std::to_string(seats_per_row) + " seats per row in flight " + flight_code + '.';
         return false;
     }
 
     if( seatMap[ record.seat_row - 1 ][ record.seat_letter - 'A' ]=='X' ){
-        err_msg = "Error: The seat position " + std::to_string(record.seat_row) + record.seat_letter + " on flight " + flight_code + " is occupied.";
+        err_msg = "The seat position " + std::to_string(record.seat_row) + record.seat_letter + " on flight " + flight_code + " is occupied.";
         return false;
     }
 
