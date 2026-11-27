@@ -108,7 +108,7 @@ bool Airline::loadData(const std::string& flights_filepath, const std::string& p
                 }
                 if (index == -1) // If the index was never changed (flight code never found)
                 {
-                    error_message = "Error: Passenger flight code not found: " + passenger_records[p].flight_code; // Set error message
+                    error_message = "Passenger flight code not found: " + passenger_records[p].flight_code; // Set error message
                     success = false; // Set success to false
                     break; // Break the passenger loop
                 }
