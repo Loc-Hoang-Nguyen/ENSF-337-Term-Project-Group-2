@@ -155,7 +155,7 @@ bool Airline::savePassengerData(const std::string& passengers_filepath) const
         } // If N was entered, do not actually save data
 
     } // If failed or something other than Y or N was entered, set the error message
-    else error_message = "Error: Please enter \'Y\' or \'N\'.";
+    else error_message = "Please enter \'Y\' or \'N\'.";
     
     // If data was NOT saved
     if (error_message.size() > 0) std::cerr << "Error: " << error_message << std::endl; // If an error message was set, print it
